@@ -42,17 +42,17 @@ public class AdministrarAuto {
     }
 
     public void LeerArchivo() throws ClassNotFoundException {
-        FileInputStream fi = null;
-        ObjectInputStream oi = null;
-        
+        FileInputStream f = null;
+        ObjectInputStream o = null;
+
         try {
             if (file.exists()) {
                 autos = new ArrayList();
                 Auto aute;
-                fi = new FileInputStream(file);
-                oi = new ObjectInputStream(fi);
+                f = new FileInputStream(file);
+                o = new ObjectInputStream(f);
                 try {
-                    while ((aute = (Auto) oi.readObject()) != null && NumeroUnico(aute.getNumeroUnico())) {
+                    while ((aute = (Auto) o.readObject()) != null && NumeroUnico(aute.getNumeroUnico())) {
                         autos.add(aute);
                     }
                 } catch (EOFException e) {
@@ -63,39 +63,39 @@ public class AdministrarAuto {
             io.printStackTrace();
         }
         try {
-            oi.close();
-            fi.close();
+            o.close();
+            f.close();
         } catch (Exception e) {
 
         }
     }
 
-    public void escribirArchivo() {
-        FileOutputStream fo = null;
-        ObjectOutputStream oo = null;
+    public void escribir() {
+        FileOutputStream f = null;
+        ObjectOutputStream o = null;
         try {
-            fo = new FileOutputStream(file);
-            oo = new ObjectOutputStream(fo);
+            f = new FileOutputStream(file);
+            o = new ObjectOutputStream(f);
             for (Auto auto : autos) {
-                oo.writeObject(auto);
+                o.writeObject(auto);
             }
-            oo.flush();
+            o.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            oo.close();
-            fo.close();
+            o.close();
+            f.close();
         } catch (Exception e) {
         }
     }
-     private boolean NumeroUnico(int numeroUnico)
-    {
-     for(Auto auto: autos){
-         if(auto.getNumeroUnico() == numeroUnico){
-             return true;
-         }
-     }
+
+    private boolean NumeroUnico(int numeroUnico) {
+        for (Auto auto : autos) {
+            if (auto.getNumeroUnico() == numeroUnico) {
+                return true;
+            }
+        }
         return false;
     }
 }
