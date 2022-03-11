@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.io.Serializable;
 
 
-public class Auto implements Serializable{
+public abstract class  Auto implements Serializable{
     private int numeroUnico;
     private double distanciaRecorrida;
     private String nombreCorredor;
@@ -56,5 +56,5 @@ public class Auto implements Serializable{
     public String toString() {
         return "Auto{" + "numeroIdentificador=" + numeroUnico + ", distanciaRecorrida=" + distanciaRecorrida + ", nombreCorredor=" + nombreCorredor + ", color=" + color + '}';
     }
-
+    public abstract int distanciaRecorrida();
 }
