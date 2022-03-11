@@ -16,8 +16,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         carro.addItem("Convertible");
         carro.addItem("Nascar");
     }
-
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
