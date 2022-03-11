@@ -1,4 +1,3 @@
-
 package Lab8;
 
 import java.io.EOFException;
@@ -11,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class AdministrarAuto {
+
     private ArrayList<Auto> autos = new ArrayList();
     File file = null;
 
@@ -36,56 +36,66 @@ public class AdministrarAuto {
     public void setFile(File file) {
         this.file = file;
     }
-    
-    public void setAuto(Auto a){
+
+    public void setAuto(Auto a) {
         autos.add(a);
     }
-    
-    public void cargarArchivo()throws ClassNotFoundException{
+
+    public void LeerArchivo() throws ClassNotFoundException {
         FileInputStream fi = null;
         ObjectInputStream oi = null;
-        try{
-            if(file.exists()){
+        
+        try {
+            if (file.exists()) {
                 autos = new ArrayList();
-                Auto a;
+                Auto aute;
                 fi = new FileInputStream(file);
                 oi = new ObjectInputStream(fi);
-                try{
-                    while((a = (Auto) oi.readObject()) != null){
-                        autos.add(a);
+                try {
+                    while ((aute = (Auto) oi.readObject()) != null && NumeroUnico(aute.getNumeroUnico())) {
+                        autos.add(aute);
                     }
-                }catch(EOFException e){
+                } catch (EOFException e) {
                     e.printStackTrace();
                 }
             }
-        }catch(IOException io){
+        } catch (IOException io) {
             io.printStackTrace();
         }
-        try{
+        try {
             oi.close();
             fi.close();
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
     }
-    
-    public void escribirArchivo(){
+
+    public void escribirArchivo() {
         FileOutputStream fo = null;
         ObjectOutputStream oo = null;
-        try{
+        try {
             fo = new FileOutputStream(file);
             oo = new ObjectOutputStream(fo);
             for (Auto auto : autos) {
                 oo.writeObject(auto);
             }
             oo.flush();
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        try{            
+        try {
             oo.close();
             fo.close();
-        }catch(Exception e){
+        } catch (Exception e) {
         }
+    }
+     private boolean NumeroUnico(int numeroUnico)
+    {
+     for(Auto auto: autos){
+         if(auto.getNumeroUnico() == numeroUnico){
+             return true;
+         }
+     }
+        return false;
     }
 }
