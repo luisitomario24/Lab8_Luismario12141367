@@ -12,7 +12,7 @@ public abstract class Auto implements Serializable {
 
     private static final long SerialVersionUID = 299L;
 
-    public Auto(int numeroUnico, double distanciaRecorrida, String nombreCorredor, Color color) {
+    public Auto(int numeroUnico,double distanciaRecorrida, String nombreCorredor, Color color) {
         this.numeroUnico = numeroUnico;
         this.distanciaRecorrida = distanciaRecorrida;
         this.nombreCorredor = nombreCorredor;

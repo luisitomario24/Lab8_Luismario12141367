@@ -2,19 +2,25 @@
 package Lab8;
 
 import java.awt.Color;
+import java.io.Serializable;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
+import javax.swing.JOptionPane;
 
 
-public class FramePrincipal extends javax.swing.JFrame {
-
+public class FramePrincipal extends javax.swing.JFrame implements Serializable{
+    
+    private String Ubicacion = "./todosmisautos.txt";
+    private Color color = Color.red;
     
     public FramePrincipal() {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        carro.addItem("Mcqueen");
-        carro.addItem("Convertible");
-        carro.addItem("Nascar");
+        tipo_carro.addItem("Mcqueen");
+        tipo_carro.addItem("Convertible");
+        tipo_carro.addItem("Nascar");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -28,18 +34,18 @@ public class FramePrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        carro = new javax.swing.JComboBox<>();
+        tipo_carro = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        distancia = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        nombreCorredor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        numeroU = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         colores = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
+        Guardar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jTextField5 = new javax.swing.JTextField();
@@ -85,7 +91,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        carro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "McQueen", "Convertible", "Nascar" }));
+        tipo_carro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "McQueen", "Convertible", "Nascar" }));
 
         jLabel4.setText("Nombre  de la pista");
 
@@ -104,10 +110,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Guardar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                GuardarActionPerformed(evt);
             }
         });
 
@@ -135,7 +141,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(283, 283, 283)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(colores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -147,7 +153,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(carro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tipo_carro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel5))
                                     .addGroup(layout.createSequentialGroup()
@@ -156,15 +162,15 @@ public class FramePrincipal extends javax.swing.JFrame {
                                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(numeroU, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(nombreCorredor, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(33, 33, 33)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel4))))
                                 .addGap(37, 37, 37)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(distancia, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 15, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -201,12 +207,12 @@ public class FramePrincipal extends javax.swing.JFrame {
                             .addComponent(cambiarColor))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
+                            .addComponent(Guardar)
                             .addComponent(jButton5)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(carro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tipo_carro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,11 +221,11 @@ public class FramePrincipal extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombreCorredor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(distancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(numeroU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(102, 102, 102))
@@ -228,21 +234,70 @@ public class FramePrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        try{
+            if(numeroU.getText().equals("") == false && numeroU.getText().equals("") == false && numeroUnico(Integer.parseInt(numeroU.getText())) == false){
+                int numeroUnico = Integer.parseInt(numeroU.getText());
+                Auto aute = null;
+                if( ((String) tipo_carro.getSelectedItem()).equals("McQueen") ){
+                    aute = new Mcqueen(numeroUnico,aute.distanciaRecorrida(),nombreCorredor.getText(),color);                                       
+                }else if( ((String) tipo_carro.getSelectedItem()).equals("Convertible") ){
+                    aute = new Convertible(numeroUnico,aute.distanciaRecorrida(),nombreCorredor.getText(),color);
+                }else if( ((String) tipo_carro.getSelectedItem()).equals("Nascar") ){
+                    aute = new Nascar(numeroUnico,aute.distanciaRecorrida(),nombreCorredor.getText(),color);
+                }               
+                AdministrarAuto administracionAuto= new AdministrarAuto();
+                administracionAuto.LeerArchivo();
+                administracionAuto.setAuto(aute);
+                administracionAuto.escribir();
+                JOptionPane.showMessageDialog(null, "Se ha creado el auto exitósamente!");
+            }else if(numeroU.getText().equals("") == false && nombreCorredor.getText().equals("") == false && numeroUnico(Integer.parseInt(numeroU.getText()))){
+                JOptionPane.showMessageDialog(null, "numero ya esta en uso.");
+            }else{
+                JOptionPane.showMessageDialog(null, "complete el formulario!");
+            }            
+            
+            aniadirAlaLista();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Numero no valido o inexistente!");
+        }       
+        numeroU.setText("");
+        nombreCorredor.setText("");
+        tipo_carro.setSelectedIndex(0);
+    }//GEN-LAST:event_GuardarActionPerformed
 
     private void coloresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloresActionPerformed
         // TODO add your handling code here:
         
     }//GEN-LAST:event_coloresActionPerformed
-
+    private void aniadirAlaLista()throws Exception{
+        AdministrarAuto administracionAuto = new AdministrarAuto();
+        administracionAuto.LeerArchivo();
+        ArrayList<Auto> autos = administracionAuto.getAutos();
+        DefaultComboBoxModel n = new DefaultComboBoxModel();
+        for (Auto auto : autos) {
+            n.addElement(auto);
+        }
+        tipo_carro.setModel(n);
+    }
     private void cambiarColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarColorActionPerformed
          JColorChooser colorChooser = new JColorChooser();
         Color color = JColorChooser.showDialog(null, "Seleccione un color", Color.black);
         cambiarColor.setBackground(color );
     }//GEN-LAST:event_cambiarColorActionPerformed
-
+    private boolean numeroUnico(int n)throws Exception{
+        AdministrarAuto administreacionAuto= new AdministrarAuto();
+        administreacionAuto.LeerArchivo();
+        ArrayList<Auto> autos = administreacionAuto.getAutos();
+        boolean AutoRepetido = false;
+        for (Auto auto : autos) {
+            if(auto.getNumeroUnico() == n){
+                AutoRepetido = true;
+                break;
+            }
+        }
+        return AutoRepetido;
+    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -277,12 +332,12 @@ public class FramePrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Guardar;
     private javax.swing.JButton cambiarColor;
-    private javax.swing.JComboBox<String> carro;
     private javax.swing.JComboBox<String> colores;
+    private javax.swing.JTextField distancia;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -296,11 +351,11 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField nombreCorredor;
+    private javax.swing.JTextField numeroU;
+    private javax.swing.JComboBox<String> tipo_carro;
     // End of variables declaration//GEN-END:variables
 }
