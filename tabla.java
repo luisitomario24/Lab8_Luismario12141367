@@ -47,7 +47,7 @@ public class tabla implements Runnable {
     public void setTable(JTable table) {
         this.table = table;
     }
-
+    
     public JProgressBar getBarra() {
         return bar;
     }
