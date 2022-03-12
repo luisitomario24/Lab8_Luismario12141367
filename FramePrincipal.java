@@ -91,8 +91,6 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        tipo_carro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "McQueen", "Convertible", "Nascar" }));
-
         jLabel4.setText("Nombre  de la pista");
 
         jLabel5.setText("Agregar");
@@ -246,7 +244,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
                 }else if( ((String) tipo_carro.getSelectedItem()).equals("Nascar") ){
                     aute = new Nascar(numeroUnico,aute.distanciaRecorrida(),nombreCorredor.getText(),color);
                 }               
-                AdministrarAuto administracionAuto= new AdministrarAuto();
+                AdministrarAuto administracionAuto= new AdministrarAuto(Ubicacion);
                 administracionAuto.LeerArchivo();
                 administracionAuto.setAuto(aute);
                 administracionAuto.escribir();
@@ -271,7 +269,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
         
     }//GEN-LAST:event_coloresActionPerformed
     private void aniadirAlaLista()throws Exception{
-        AdministrarAuto administracionAuto = new AdministrarAuto();
+        AdministrarAuto administracionAuto = new AdministrarAuto(Ubicacion);
         administracionAuto.LeerArchivo();
         ArrayList<Auto> autos = administracionAuto.getAutos();
         DefaultComboBoxModel n = new DefaultComboBoxModel();
