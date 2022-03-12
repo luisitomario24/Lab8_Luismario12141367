@@ -13,7 +13,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
     
     private String Ubicacion = "./todosmisautos.txt";
     private Color color = Color.red;
-    
+    Thread hilo;//Declaracion del hilo
     public FramePrincipal() {
         initComponents();
         this.setVisible(true);
@@ -21,6 +21,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
         tipo_carro.addItem("Mcqueen");
         tipo_carro.addItem("Convertible");
         tipo_carro.addItem("Nascar");
+        AdministrarAuto adminastracionA= new AdministrarAuto(Ubicacion);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -28,7 +29,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        Comenzar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -68,7 +69,12 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Comenzar");
+        Comenzar.setText("Comenzar");
+        Comenzar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComenzarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Pausar");
 
@@ -172,7 +178,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
                                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 15, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(Comenzar)
                         .addGap(27, 27, 27)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -190,7 +196,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Comenzar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
@@ -263,7 +269,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
         nombreCorredor.setText("");
         tipo_carro.setSelectedIndex(0);
     }//GEN-LAST:event_GuardarActionPerformed
-
+    
     private void coloresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloresActionPerformed
         // TODO add your handling code here:
         
@@ -283,6 +289,13 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
         Color color = JColorChooser.showDialog(null, "Seleccione un color", Color.black);
         cambiarColor.setBackground(color );
     }//GEN-LAST:event_cambiarColorActionPerformed
+
+    private void ComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComenzarActionPerformed
+        tabla t= new tabla();
+        hilo = new Thread(t);
+        t.getBarra().setValue(0);
+        hilo.start();  
+    }//GEN-LAST:event_ComenzarActionPerformed
     private boolean numeroUnico(int n)throws Exception{
         AdministrarAuto administreacionAuto= new AdministrarAuto();
         administreacionAuto.LeerArchivo();
@@ -330,11 +343,11 @@ public class FramePrincipal extends javax.swing.JFrame implements Serializable{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Comenzar;
     private javax.swing.JButton Guardar;
     private javax.swing.JButton cambiarColor;
     private javax.swing.JComboBox<String> colores;
     private javax.swing.JTextField distancia;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
